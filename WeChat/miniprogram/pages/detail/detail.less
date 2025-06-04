@@ -1,0 +1,502 @@
+/**detail.less**/
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8;
+}
+
+.scrollarea {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.container {
+  padding: 30rpx;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* 详情卡片样式 */
+.detail-card {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+  margin-bottom: 30rpx;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.detail-card.warning {
+  border-left: 10rpx solid #ff9800;
+}
+
+.detail-card.expired {
+  border-left: 10rpx solid #f44336;
+}
+
+/* 食物图片样式 */
+.food-image-container {
+  width: 420rpx;
+  height: 420rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  margin: 0 auto 30rpx;
+  position: relative;
+}
+
+.food-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 食物基本信息样式 */
+.food-basic-info {
+  margin-bottom: 30rpx;
+  position: relative;
+}
+
+.food-name {
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 16rpx;
+  color: #333;
+}
+
+.food-category {
+  font-size: 28rpx;
+  color: #666;
+  background-color: #f0f0f0;
+  padding: 6rpx 20rpx;
+  border-radius: 20rpx;
+  display: inline-block;
+}
+
+/* 内联编辑按钮样式 */
+.inline-edit-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #3cc51f;
+  color: #fff;
+  font-size: 24rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 30rpx;
+  line-height: 1.2;
+  border: none;
+  min-height: auto;
+}
+
+.edit-form {
+  margin-top: 20rpx;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid #eee;
+  border-radius: 12rpx;
+  padding: 0 20rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+}
+
+.form-textarea {
+  width: 100%;
+  height: 160rpx;
+  border: 2rpx solid #eee;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+}
+
+.picker-text {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid #eee;
+  border-radius: 12rpx;
+  padding: 0 20rpx;
+  font-size: 30rpx;
+  line-height: 80rpx;
+  box-sizing: border-box;
+}
+
+.save-btn {
+  background-color: #3cc51f;
+  color: #fff;
+  border-radius: 12rpx;
+  margin-top: 20rpx;
+}
+
+/* 保质期信息样式 */
+.expiry-info-container {
+  margin-bottom: 30rpx;
+  padding: 20rpx;
+  background-color: #f9f9f9;
+  border-radius: 12rpx;
+}
+
+.date-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+}
+
+.date-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-label {
+  font-size: 26rpx;
+  color: #666;
+  margin-bottom: 8rpx;
+}
+
+.date-value {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.countdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16rpx;
+  border-radius: 8rpx;
+  background-color: #e8f5e9;
+  
+  .days-info {
+    display: flex;
+    align-items: center;
+    font-size: 28rpx;
+    color: #333;
+    
+    .days-stored,
+    .days-separator,
+    .countdown-text {
+      font-size: 28rpx;
+      color: #333;
+      margin: 0 4rpx;
+    }
+    
+    .countdown-number {
+      font-size: 36rpx;
+      font-weight: bold;
+      color: #3cc51f;
+      margin: 0 4rpx;
+    }
+  }
+}
+
+.countdown.warning {
+  background-color: #fff3e0;
+  
+  .countdown-number {
+    color: #ff9800;
+  }
+}
+
+.countdown.expired {
+  background-color: #ffebee;
+  
+  .countdown-number {
+    color: #f44336;
+  }
+}
+
+.countdown-number {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #3cc51f;
+  margin-right: 8rpx;
+}
+
+.countdown.warning .countdown-number {
+  color: #ff9800;
+}
+
+.countdown.expired .countdown-number {
+  color: #f44336;
+}
+
+.countdown-text {
+  font-size: 28rpx;
+  color: #333;
+}
+
+/* 备注信息样式 */
+.notes-container {
+  margin-top: 30rpx;
+  padding-top: 30rpx;
+  border-top: 2rpx solid #f0f0f0;
+}
+
+.notes-label {
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 16rpx;
+  display: block;
+}
+
+.notes-content {
+  font-size: 30rpx;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* 提醒设置样式 */
+.reminder-section {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+  margin-bottom: 30rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+}
+
+.reminder-options {
+  padding: 10rpx 0;
+  width: 100%;
+}
+
+.reminder-switch {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+  font-size: 30rpx;
+  color: #333;
+  width: 100%;
+}
+
+.reminder-days {
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  color: #333;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.picker-view {
+  margin: 0 20rpx;
+  color: #3cc51f;
+  font-weight: bold;
+}
+
+/* 操作按钮样式 */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40rpx;
+  width: 100%;
+}
+
+.action-btn {
+  width: 80%;
+  max-width: 600rpx;
+  border-radius: 12rpx;
+  font-size: 32rpx;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: #fff;
+}
+
+/* 响应式布局 */
+@media screen and (min-width: 768px) {
+  .detail-card {
+    max-width: 700rpx;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .reminder-section {
+    max-width: 700rpx;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .action-buttons {
+    max-width: 700rpx;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* 编辑模态弹窗样式 */
+.edit-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+}
+
+.edit-modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 700rpx;
+  max-height: 90vh;
+  background-color: #fff;
+  border-radius: 20rpx;
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, 0.15);
+}
+
+.edit-modal-header {
+  padding: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.edit-modal-title {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.edit-modal-close {
+  font-size: 40rpx;
+  color: #999;
+  line-height: 1;
+  padding: 10rpx;
+}
+
+/* 添加滚动容器样式 */
+.edit-form-scroll {
+  max-height: 60vh; /* 设置最大高度为视口高度的60% */
+  width: 100%;
+  overflow-y: auto;
+  padding: 30rpx;
+  box-sizing: border-box;
+}
+
+.edit-form {
+  width: 100%;
+  padding-bottom: 20rpx;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.form-label {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 10rpx;
+}
+
+.required {
+  color: #f44336;
+}
+
+.form-input {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid #eee;
+  border-radius: 12rpx;
+  padding: 0 20rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+}
+
+.form-textarea {
+  width: 100%;
+  height: 160rpx;
+  border: 2rpx solid #eee;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  font-size: 30rpx;
+  box-sizing: border-box;
+}
+
+.picker-text {
+  width: 100%;
+  height: 80rpx;
+  border: 2rpx solid #eee;
+  border-radius: 12rpx;
+  padding: 0 20rpx;
+  font-size: 30rpx;
+  line-height: 80rpx;
+  box-sizing: border-box;
+}
+
+.edit-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20rpx;
+
+  button {
+    height: 80rpx;
+    line-height: 50rpx;
+    font-size: 28rpx;
+    border-radius: 8rpx;
+    margin: 0;
+    flex: 0.48;
+  }
+
+}
+
+.cancel-btn {
+  background-color: #f5f5f5;
+  color: #666;
+  border-radius: 12rpx;
+  flex: 1;
+  margin-right: 10rpx;
+}
+
+.save-btn {
+  background-color: #3cc51f;
+  color: #fff;
+  border-radius: 12rpx;
+  flex: 1;
+  margin-left: 10rpx;
+}

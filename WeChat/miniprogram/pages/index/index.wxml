@@ -1,0 +1,73 @@
+<!--index.wxml-->
+<navigation-bar title="食物保质期" back="{{false}}" color="white" background="#3cc51f"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <!-- 顶部类别筛选下拉框 -->
+    <view class="category-dropdown-container">
+      <view class="category-label">食品类别:</view>
+      <picker class="category-picker" bindchange="onCategoryChange" value="{{categoryIndex}}" range="{{categoryOptions}}">
+        <view class="picker-content">
+          <text>{{categoryOptions[categoryIndex]}}</text>
+          <view class="dropdown-icon"></view>
+        </view>
+      </picker>
+    </view>
+
+    <!-- 顶部搜索栏 -->
+    <view class="search-bar">
+      <view class="search-input-wrapper">
+        <icon type="search" size="14" color="#999"></icon>
+        <input class="search-input" placeholder="搜索食物" bindinput="onSearchInput" confirm-type="search"/>
+      </view>
+      <view class="filter-btn" bindtap="showFilterOptions">
+        <text>筛选</text>
+      </view>
+    </view>
+
+    <!-- 食物列表 -->
+    <view class="food-list">
+      <block wx:if="{{filteredFoods.length > 0}}">
+        <view wx:for="{{filteredFoods}}" wx:key="id" class="food-card {{item.expiryStatus}}">
+          <view class="food-image-container" bindtap="goToDetail" data-id="{{item.id}}">
+            <image class="food-image" src="{{item.imageUrl || '/images/default-food.png'}}" mode="aspectFill"></image>
+          </view>
+          <view class="food-info" bindtap="goToDetail" data-id="{{item.id}}">
+            <view class="food-name">{{item.name}}</view>
+            <view class="food-category">{{item.category}}</view>
+            <view class="food-dates">
+              <text>购买日期: {{item.addedDateFormatted}}</text>
+            </view>
+            <view class="expiry-info {{item.expiryStatus}}">
+              <view class="days-info">
+                <text class="days-stored">已购买 {{item.daysStored}} 天</text>
+                <text class="days-separator">·</text>
+                <block wx:if="{{item.daysToExpiry > 0}}">
+                  <text>还剩 {{item.daysToExpiry}} 天到期</text>
+                </block>
+                <block wx:elif="{{item.daysToExpiry === 0}}">
+                  <text>今天到期</text>
+                </block>
+                <block wx:else>
+                  <text>已过期 {{-item.daysToExpiry}} 天</text>
+                </block>
+              </view>
+            </view>
+          </view>
+          <view class="delete-btn" catchtap="deleteFood" data-id="{{item.id}}">
+            <text class="delete-text">删除</text>
+          </view>
+        </view>
+      </block>
+      <view wx:else class="empty-state">
+        <image src="/images/empty-fridge.png" mode="aspectFit" class="empty-image"></image>
+        <text class="empty-text">现在还没有食物哦</text>
+        <text class="empty-subtext">点击下方按钮添加食物</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 添加食物按钮 -->
+<view class="add-btn" bindtap="goToAdd">
+  <text class="add-icon">+</text>
+</view>

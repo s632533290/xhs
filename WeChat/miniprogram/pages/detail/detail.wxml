@@ -1,0 +1,133 @@
+<!--detail.wxml-->
+<navigation-bar title="食物详情" back="{{true}}" color="white" background="#3cc51f"></navigation-bar>
+<scroll-view class="scrollarea" scroll-y type="list">
+  <view class="container">
+    <!-- 食物详情卡片 -->
+    <view class="detail-card {{food.expiryStatus}}">
+      <!-- 食物图片 -->
+      <view class="food-image-container">
+        <image class="food-image" src="{{food.imageUrl || '/images/default-food.png'}}" mode="aspectFill"></image>
+      </view>
+      
+      <!-- 食物基本信息 -->
+      <view class="food-basic-info">
+        <view class="food-name">{{food.name}}</view>
+        <view class="food-category">{{food.category}}</view>
+        <button class="inline-edit-btn" bindtap="toggleEditMode">编辑</button>
+      </view>
+      
+      <!-- 保质期信息 -->
+      <view class="expiry-info-container">
+        <view class="date-info">
+          <view class="date-item">
+            <text class="date-label">购买日期</text>
+            <text class="date-value">{{food.addedDateFormatted}}</text>
+          </view>
+          <view class="date-item">
+            <text class="date-label">到期日期</text>
+            <text class="date-value">{{food.expiryDateFormatted}}</text>
+          </view>
+        </view>
+        
+        <view class="countdown {{food.expiryStatus}}">
+          <view class="days-info">
+            <text class="days-stored">已购买 {{food.daysStored}} 天</text>
+            <text class="days-separator">·</text>
+            <block wx:if="{{food.daysToExpiry > 0}}">
+              <text class="countdown-number">{{food.daysToExpiry}}</text>
+              <text class="countdown-text">天后到期</text>
+            </block>
+            <block wx:elif="{{food.daysToExpiry === 0}}">
+              <text class="countdown-text">今天到期</text>
+            </block>
+            <block wx:else>
+              <text class="countdown-number">{{-food.daysToExpiry}}</text>
+              <text class="countdown-text">天前已过期</text>
+            </block>
+          </view>
+        </view>
+      </view>
+      
+      <!-- 备注信息 -->
+      <block wx:if="{{food.notes}}">
+        <view class="notes-container">
+          <text class="notes-label">备注</text>
+          <text class="notes-content">{{food.notes}}</text>
+        </view>
+      </block>
+    </view>
+    
+    <!-- 提醒设置 -->
+    <view class="reminder-section">
+      <view class="section-title">提醒设置</view>
+      <view class="reminder-options">
+        <view class="reminder-switch">
+          <text>到期提醒</text>
+          <switch checked="{{reminderEnabled}}" bindchange="setReminder" color="#3cc51f"/>
+        </view>
+        <view class="reminder-days" wx:if="{{reminderEnabled}}">
+          <text>提前</text>
+          <picker mode="selector" range="{{reminderDays}}" value="{{reminderDayIndex}}" bindchange="changeReminderDays">
+            <view class="picker-view">{{reminderDays[reminderDayIndex]}} 天</view>
+          </picker>
+          <text>提醒我</text>
+        </view>
+      </view>
+    </view>
+    
+    <!-- 操作按钮 -->
+    <view class="action-buttons">
+      <button class="action-btn delete-btn" bindtap="deleteFood">删除</button>
+    </view>
+  </view>
+</scroll-view>
+
+<!-- 编辑食物弹窗 -->
+<view class="edit-modal" wx:if="{{isEditing}}">
+  <view class="edit-modal-mask" bindtap="toggleEditMode"></view>
+  <view class="edit-modal-content">
+    <view class="edit-modal-header">
+      <text class="edit-modal-title">编辑食物</text>
+      <view class="edit-modal-close" bindtap="toggleEditMode">×</view>
+    </view>
+    <scroll-view scroll-y class="edit-form-scroll">
+      <form bindsubmit="saveEdit" class="edit-form">
+        <view class="form-item">
+          <text class="form-label">食物名称 <text class="required">*</text></text>
+          <input class="form-input" name="name" value="{{food.name}}" placeholder="请输入食物名称"/>
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">食物分类</text>
+          <picker mode="selector" range="{{['蔬菜水果', '肉类', '海鲜', '乳制品', '熟食', '冷冻食品', '其他']}}" value="{{['蔬菜水果', '肉类', '海鲜', '乳制品', '熟食', '冷冻食品', '其他'].indexOf(food.category)}}" bindchange="onCategoryChange" name="category">
+            <view class="picker-text">{{tempCategory || food.category}}</view>
+          </picker>
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">购买日期</text>
+          <picker mode="date" value="{{tempAddedDate || food.addedDateFormatted}}" bindchange="onAddedDateChange" name="addedDate">
+            <view class="picker-text">{{tempAddedDate || food.addedDateFormatted}}</view>
+          </picker>
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">到期日期 <text class="required">*</text></text>
+          <picker mode="date" value="{{tempExpiryDate || food.expiryDateFormatted}}" bindchange="onExpiryDateChange" name="expiryDate">
+            <view class="picker-text">{{tempExpiryDate || food.expiryDateFormatted}}</view>
+          </picker>
+        </view>
+        
+        <view class="form-item">
+          <text class="form-label">备注</text>
+          <textarea class="form-textarea" name="notes" value="{{food.notes}}" placeholder="添加备注信息"/>
+        </view>
+        
+        <view class="edit-actions">
+          <button class="cancel-btn" bindtap="toggleEditMode">取消</button>
+          <button class="save-btn" form-type="submit">保存</button>
+        </view>
+      </form>
+    </scroll-view>
+  </view>
+</view>

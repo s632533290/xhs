@@ -1,0 +1,124 @@
+/**settings.less**/
+page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8;
+}
+
+.scrollarea {
+  flex: 1;
+  overflow-y: hidden;
+}
+
+.container {
+  padding: 30rpx;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* 卡片通用样式 */
+.stats-card,
+.settings-card {
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 30rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.08);
+  margin-bottom: 30rpx;
+}
+
+/* 统计卡片样式 */
+.stats-title,
+.settings-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: space-between;
+  padding: 20rpx 0;
+}
+
+.stats-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.stats-number {
+  font-size: 48rpx;
+  font-weight: bold;
+  color: #3cc51f;
+  margin-bottom: 10rpx;
+}
+
+.stats-label {
+  font-size: 28rpx;
+  color: #666;
+}
+
+.stats-item.warning .stats-number {
+  color: #ff9800;
+}
+
+.stats-item.expired .stats-number {
+  color: #f44336;
+}
+
+/* 设置项样式 */
+.settings-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.settings-item:last-child {
+  border-bottom: none;
+}
+
+.settings-label {
+  font-size: 30rpx;
+  color: #333;
+}
+
+.time-picker {
+  font-size: 30rpx;
+  color: #3cc51f;
+  font-weight: bold;
+}
+
+.settings-tip {
+  font-size: 26rpx;
+  color: #999;
+  padding: 20rpx 0 0;
+  line-height: 1.5;
+}
+
+/* 按钮样式 */
+.settings-button {
+  padding: 20rpx 0;
+  text-align: center;
+  font-size: 30rpx;
+  color: #3cc51f;
+  border-bottom: 2rpx solid #f0f0f0;
+}
+
+.settings-button:last-child {
+  border-bottom: none;
+}
+
+.settings-button:active {
+  background-color: #f9f9f9;
+}
+
+.settings-button.danger {
+  color: #f44336;
+}

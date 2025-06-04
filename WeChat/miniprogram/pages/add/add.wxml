@@ -1,0 +1,93 @@
+<!--add.wxml-->
+<navigation-bar title="添加食物" back="{{true}}" color="white" background="#3cc51f"></navigation-bar>
+
+<!-- 相机视图 -->
+<block wx:if="{{showCamera}}">
+  <camera device-position="back" flash="auto" style="width: 100%; height: 100vh;">
+    <cover-view class="camera-controls">
+      <cover-view class="camera-btn" bindtap="takePhoto">拍照</cover-view>
+      <cover-view class="camera-btn cancel-btn" bindtap="cancelCamera">取消</cover-view>
+    </cover-view>
+  </camera>
+</block>
+
+<!-- 添加食物表单 -->
+<block wx:else>
+  <scroll-view class="scrollarea" scroll-y type="list">
+    <view class="container">
+      <view class="form-card" style="width: 100%;">
+        <!-- 食物图片 -->
+        <view class="image-section">
+          <view class="image-container" wx:if="{{imageUrl}}">
+            <image src="{{imageUrl}}" mode="aspectFill" class="food-image"></image>
+            <view class="image-overlay" bindtap="openCamera">
+              <text class="overlay-text">重新拍照</text>
+            </view>
+          </view>
+          <view class="image-placeholder" wx:else bindtap="openCamera">
+            <view class="placeholder-icon">+</view>
+            <text class="placeholder-text">拍照记录食物</text>
+          </view>
+          <view class="album-btn" bindtap="chooseFromAlbum">从相册选择</view>
+        </view>
+        
+        <!-- 食物信息表单 -->
+        <view class="form-section">
+          <view class="form-item">
+            <text class="form-label">食物名称 <text class="required">*</text></text>
+            <input class="form-input" value="{{name}}" bindinput="onNameInput" placeholder="请输入食物名称"/>
+          </view>
+          
+          <view class="form-item">
+            <text class="form-label">食物分类</text>
+            <picker mode="selector" range="{{categories}}" value="{{categoryIndex}}" bindchange="onCategoryChange">
+              <view class="picker-view">{{category}}</view>
+            </picker>
+          </view>
+          
+          <view class="form-item">
+            <text class="form-label">放入日期</text>
+            <picker mode="date" value="{{addedDate}}" bindchange="onAddedDateChange">
+              <view class="picker-view">{{addedDate}}</view>
+            </picker>
+          </view>
+          
+          <view class="form-item">
+            <text class="form-label">到期日期 <text class="required">*</text></text>
+            <picker mode="date" value="{{expiryDate}}" bindchange="onExpiryDateChange">
+              <view class="picker-view">{{expiryDate}}</view>
+            </picker>
+          </view>
+          
+          <view class="form-item">
+            <text class="form-label">备注</text>
+            <textarea class="form-textarea" value="{{notes}}" bindinput="onNotesInput" placeholder="添加备注信息"/>
+          </view>
+        </view>
+        
+        <!-- 提醒设置 -->
+        <view class="reminder-section">
+          <view class="section-title">提醒设置</view>
+          <view class="reminder-options">
+            <view class="reminder-switch">
+              <text>到期提醒</text>
+              <switch checked="{{reminderEnabled}}" bindchange="setReminder" color="#3cc51f"/>
+            </view>
+            <view class="reminder-days" wx:if="{{reminderEnabled}}">
+              <text>提前</text>
+              <picker mode="selector" range="{{reminderDays}}" value="{{reminderDayIndex}}" bindchange="changeReminderDays">
+                <view class="picker-view days-picker">{{reminderDays[reminderDayIndex]}} 天</view>
+              </picker>
+              <text>提醒我</text>
+            </view>
+          </view>
+        </view>
+        <!-- 保存按钮 - 移至表单内部，随页面滚动 -->
+        <view class="save-btn-container">
+          <button class="save-btn" bindtap="saveFood">保存</button>
+        </view>
+      </view>
+      
+    </view>
+  </scroll-view>
+</block>
